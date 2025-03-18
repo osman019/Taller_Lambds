@@ -2,18 +2,21 @@ package com.tallerlamdbs.Modelos;
 
 import java.util.ArrayList;
 
+
 public class Equipos {
     private int id;
     private String name;
     private int yearfoundation;
     private ArrayList<Jugadores> Jugadores;
     private String coach;
+    private ArrayList<Equipos> equiposJson;
     
     public Equipos(int id, String name, int yearfoundation, String coach) {
         this.id = id;
         this.name = name;
         this.yearfoundation = yearfoundation;
         this.coach = coach;
+        this.equiposJson = new ArrayList<>();
         this.Jugadores = new ArrayList<>();
     }
 
@@ -50,4 +53,11 @@ public class Equipos {
         return Jugadores;
     }
 
+    public ArrayList<Equipos> getEquiposJson() {
+        return equiposJson;
+    }
+
+    public void setEquiposJson(ArrayList<Equipos> equiposJson) {
+        this.equiposJson = equiposJson;
+    }
 }

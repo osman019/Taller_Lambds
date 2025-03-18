@@ -8,6 +8,8 @@ import com.tallerlamdbs.Modelos.Equipos;
 import com.tallerlamdbs.Service.EquipoService;
 
 public class Main {
+    private static List<Equipos> equiposJson;
+    EquipoService equipoService = new EquipoService();
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -19,7 +21,7 @@ public class Main {
         while (true) {
             limpiarPantalla();
             System.out.println("========================");
-            System.out.println("==   MENÚ PRINCIPAL   ==");
+            System.out.println("=    MENÚ PRINCIPAL    =");
             System.out.println("========================");
             System.out.println("1. Menu Equipos");
             System.out.println("2. Menu Jugadores");
@@ -28,7 +30,7 @@ public class Main {
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine(); 
 
             switch (opcion) {
                 case 1:
@@ -53,11 +55,14 @@ public class Main {
         EquipoService equipoService = new EquipoService();
         while (true) {
             limpiarPantalla();
+            System.out.println("                        "); 
             System.out.println("========================");
             System.out.println("==   MENÚ EQUIPOS   ==");
             System.out.println("========================");
             System.out.println("1. Listar equipos fundados desde 2000");
+            System.out.println("2. listar entrenadores");
             System.out.println("2. Volver al menú principal");
+            
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -68,8 +73,8 @@ public class Main {
             listarEquipos(equipoService);
                 
                 break;
-          
-            default:
+          case 2 :
+          imprimirEntrenadores();
                 break;
           }
         }
@@ -125,8 +130,18 @@ public class Main {
     private static void listarEquipos(EquipoService equipoService) {
         Predicate<Equipos> filtroDesde2000 = equipo -> equipo.getYearfoundation() >= 2000;
         List<Equipos> equipos = EquipoService.listarEquipos(filtroDesde2000);
-        for (Equipos equipo : equipos) {
-            System.out.println(equipo);
+        System.out.println(equipos);
         }
+    
+
+        private static void imprimirEntrenadores() {
+            if (equiposJson != null && !equiposJson.isEmpty()) {
+                System.out.println("Coachs: ");
+                equiposJson.forEach(e -> System.out.println(e.getCoach()));
+            } else {
+                System.out.println("No hay Coachs disponibles.");
+            }
+        }
+        
     }
-}
+

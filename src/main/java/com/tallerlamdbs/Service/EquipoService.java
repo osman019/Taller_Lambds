@@ -49,5 +49,9 @@ public class EquipoService {
         return listaEquipos.stream()
                 .filter(filtro)
                 .collect(Collectors.toList());
-    }
+            }
+
+            public void imprimirEntrenadores (List<Equipos>equiposJson){
+                equiposJson.forEach(e -> System.out.println(e.getCoach()));
+            }
 }

@@ -6,11 +6,14 @@ public class Equipos {
     private int id;
     private String name;
     private int yearfoundation;
-     private ArrayList<Jugadores> Jugadores;
-    public Equipos(int id, String name, int yearfoundation) {
+    private ArrayList<Jugadores> Jugadores;
+    private String coach;
+    
+    public Equipos(int id, String name, int yearfoundation, String coach) {
         this.id = id;
         this.name = name;
         this.yearfoundation = yearfoundation;
+        this.coach = coach;
         this.Jugadores = new ArrayList<>();
     }
 
@@ -37,7 +40,12 @@ public class Equipos {
     public void setYearfoundation(int yearfoundation) {
         this.yearfoundation = yearfoundation;
     }
-
+     public String getCoach() {
+        return coach;
+    }
+    public void setCoach(String coach) {
+        this.coach = coach;
+    }
     public ArrayList<Jugadores> getJugadores() {
         return Jugadores;
     }

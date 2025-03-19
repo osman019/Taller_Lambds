@@ -1,38 +1,37 @@
 package com.tallerlamdbs;
 
-import java.util.List;
+
 import java.util.Scanner;
-import java.util.function.Predicate;
 
-import com.tallerlamdbs.Modelos.Equipos;
+
+
 import com.tallerlamdbs.Service.EquipoService;
+import com.tallerlamdbs.Service.JugadoresService;
 
-public class Main {
 
-    EquipoService equipoService = new EquipoService();
-    public static void limpiarPantalla() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+ 
 
+public class Main { public static void limpiarPantalla() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+}
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int opcionPrincipal;
+       
+    
 
-        while (true) {
-            limpiarPantalla();
-            System.out.println("========================");
-            System.out.println("=    MENÚ PRINCIPAL    =");
-            System.out.println("========================");
-            System.out.println("1. Menu Equipos");
-            System.out.println("2. Menu Jugadores");
-            System.out.println("3. Menu Estadisticas");
-            System.out.println("Salir: ");
+        do {
+    limpiarPantalla();
+            System.out.println("\n========== MENÚ PRINCIPAL ==========");
+            System.out.println("1. Equipos");
+            System.out.println("2. Jugadores");
+            System.out.println("3. Salir");
+            System.out.println("=======================================");
             System.out.print("Seleccione una opción: ");
+            opcionPrincipal = scanner.nextInt();
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); 
-
-            switch (opcion) {
+            switch (opcionPrincipal) {
                 case 1:
                     menuEquipos(scanner);
                     break;
@@ -40,107 +39,76 @@ public class Main {
                     menuJugadores(scanner);
                     break;
                 case 3:
-                   menuEstadisticas(scanner);
-                    case 4:
-                    System.out.println("Saliendo...");
-                    scanner.close();
-                    System.exit(0);
+                    System.out.println("Saliendo del programa...");
+                    break;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opción inválida, intente de nuevo.");
             }
-        }
+        } while (opcionPrincipal != 3);
+
+        scanner.close();
     }
 
     private static void menuEquipos(Scanner scanner) {
-        EquipoService equipoService = new EquipoService();
-        while (true) {
-            limpiarPantalla();
-            System.out.println("                        "); 
-            System.out.println("========================");
-            System.out.println("==   MENÚ EQUIPOS   ==");
-            System.out.println("========================");
-            System.out.println("1. Listar equipos fundados desde 2000");
-            System.out.println("2. listar entrenadores");
-            System.out.println("3. Volver al menú principal");
-            
-            System.out.print("Seleccione una opción: ");
+        int opcion;
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-          switch (opcion) {
-            case 1:
-            listarEquipos(
-
-            );
-                
-                break;
-          case 2 :
-          listarEntrenadores(equipoService);
-                break;
-                case 3 : return;
-          }
-        }
-    }
-
-    private static void menuJugadores(Scanner scanner) {
-        // JugadoresService jugadorService = new JugadoresService();
-        while (true) {
-            limpiarPantalla();
-            System.out.println("========================");
-            System.out.println("==   MENÚ JUGADORES   ==");
-            System.out.println("========================");
-            System.out.println("1. Listar jugadores");
-            System.out.println("2. Volver al menú principal");
-            System.out.print("Seleccione una opción: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-            if (opcion == 1) {
-                System.out.println("prueba");
-            } else if (opcion == 2) {
-                return;
-            } else {
-                System.out.println("Opción inválida.");
-            }
-        }
-    }
-
-    public static void menuEstadisticas(Scanner scanner){
-        while (true) {
-            limpiarPantalla();
-            System.out.println("========================");
-            System.out.println("==    ESTADISTICAS    ==");
-            System.out.println("========================");
-            System.out.println("1. PROXIMAMENTE");
-            System.out.println("2. Volver al menú principal");
-            System.out.print("Seleccione una opción: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-            if (opcion == 1) {
-                System.out.println("prueba");
-            } else if (opcion == 2) {
-                return;
-            } else {
-                System.out.println("Opción inválida.");
-            }
-        }
-    }
-
-    private static void listarEquipos() {
-        Predicate<Equipos> filtroDesde2000 = equipo -> equipo.getYearfoundation() >= 2000;
-    List<Equipos> equipos = EquipoService.listarEquipos(filtroDesde2000);
-        System.out.println(equipos);
-        }
-    
-        private static void listarEntrenadores(EquipoService equipoService) {
-            @SuppressWarnings("unused")
-            List<String> entrenadores = EquipoService.obtenerNombresEntrenadores();
-       
+        do {
            
-        
-    }}
+            System.out.println("\n===== MENÚ EQUIPOS =====");
+            System.out.println("1. Listar Equipos fundados despues del año 2000");
+            System.out.println("2. Mostrar Entrenadores");
+            System.out.println("3. Volver al Menú Principal");
+            System.out.println("============================");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
 
+            switch (opcion) {
+               
+                case 1:
+                EquipoService.listarEquiposFundadosDespuesDe2000();
+                break;
+            
+                    
+                case 2:
+                    EquipoService.imprimirNombresEntrenadores();
+                    break;
+                case 3:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida, intente de nuevo.");
+            }
+        } while (opcion != 3);
+    }
+
+  
+    private static void menuJugadores(Scanner scanner) {
+        int opcion;
+        do {
+            limpiarPantalla();
+            System.out.println("\n===== MENÚ JUGADORES =====");
+            System.out.println("1. Calcular Promedio de Edad por Equipo");
+            System.out.println("2. Volver al Menú Principal");
+            System.out.println("============================");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                System.out.println("-------------------------------");
+                System.out.println("- Promedio de edad por equipo -");
+                System.out.println("-------------------------------");
+                    JugadoresService.calcularPromedioEdadPorEquipo();
+                    break;
+                case 2:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida, intente de nuevo.");
+            }
+        } while (opcion != 2);
+    }
+}
+
+
+   

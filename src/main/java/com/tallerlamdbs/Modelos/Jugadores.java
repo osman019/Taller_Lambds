@@ -8,7 +8,15 @@ public class Jugadores {
     private int height;
     private int weight;
     private String position;
+    private Equipos equipo;
 
+
+    public Jugadores(int age, String name, String position) {
+        this.age = age;
+        this.name = name;
+        this.position = position;
+    }
+    
     public Jugadores(int dorsal, String name, String nationality, int age, int height, int weight, String position) {
         this.dorsal = dorsal;
         this.name = name;
@@ -19,7 +27,10 @@ public class Jugadores {
         this.position = position;
 
     }
-
+    public Equipos getEquipo() {
+        return equipo;
+    }
+    
     public int getDorsal() {
         return dorsal;
     }

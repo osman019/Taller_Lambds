@@ -21,20 +21,20 @@ public class JugadoresService {
         List<Equipos> listaEquipos = new ArrayList<>();
 
         try {
-            // 🔹 Leer el archivo JSON
+          
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(new FileReader(JSON_PATH));
             JSONObject jsonObject = (JSONObject) obj;
 
-            // 🔹 Obtener la lista de equipos del JSON
+           
             JSONArray equipos = (JSONArray) jsonObject.get("equipos");
 
-            // 🔹 Recorrer los equipos y obtener la lista de jugadores
+            // Recorrer los equipos y obtener la lista de jugadores
             for (Object equipoObj : equipos) {
                 JSONObject equipoJSON = (JSONObject) equipoObj;
                 String nombreEquipo = (String) equipoJSON.get("name");
 
-                // 🔹 Obtener la lista de jugadores
+                // Obtener la lista de jugadores
                 JSONArray jugadoresJSON = (JSONArray) equipoJSON.get("players");
                 List<Jugadores> listaJugadores = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class JugadoresService {
                     listaJugadores.add(jugador);
                 }
 
-                // ✅ Crear objeto Equipo
+                //  Crear objeto Equipo
                 Equipos equipo = new Equipos(
                     Integer.parseInt(equipoJSON.get("id").toString()),
                     nombreEquipo,
@@ -61,7 +61,7 @@ public class JugadoresService {
 
                 listaEquipos.add(equipo);
 
-                // 🔹 BiConsumer para calcular y mostrar el promedio de edad
+                //  BiConsumer para calcular y mostrar el promedio de edad
                 BiConsumer<Equipos, List<Jugadores>> calcularPromedioEdad = (eq, jugadores) -> {
                     double promedioEdad = jugadores.stream()
                             .collect(Collectors.averagingInt(Jugadores::getAge));
@@ -69,7 +69,7 @@ public class JugadoresService {
                     System.out.printf("Equipo: %-20s | Promedio Edad: %.2f %n", eq.getName(), promedioEdad);
                 };
 
-                // 🔹 Aplicar el BiConsumer
+                //  Aplicar el BiConsumer
                 calcularPromedioEdad.accept(equipo, listaJugadores);
             }
 

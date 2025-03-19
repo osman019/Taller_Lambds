@@ -18,7 +18,7 @@ public class Equipos {
         this.jugadores = new ArrayList<>(); 
     }
 
-    // Getters y Setters
+  
     public int getId() {
         return id;
     }

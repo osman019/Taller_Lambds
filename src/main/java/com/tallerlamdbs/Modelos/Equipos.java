@@ -1,25 +1,24 @@
 package com.tallerlamdbs.Modelos;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class Equipos {
     private int id;
     private String name;
     private int yearfoundation;
-    private ArrayList<Jugadores> Jugadores;
     private String coach;
-    private ArrayList<Equipos> equiposJson;
-    
+    private List<Jugadores> jugadores; 
+
     public Equipos(int id, String name, int yearfoundation, String coach) {
         this.id = id;
         this.name = name;
         this.yearfoundation = yearfoundation;
         this.coach = coach;
-        this.equiposJson = new ArrayList<>();
-        this.Jugadores = new ArrayList<>();
+        this.jugadores = new ArrayList<>(); 
     }
 
+    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -43,21 +42,26 @@ public class Equipos {
     public void setYearfoundation(int yearfoundation) {
         this.yearfoundation = yearfoundation;
     }
-     public String getCoach() {
+
+    public String getCoach() {
         return coach;
     }
+
     public void setCoach(String coach) {
         this.coach = coach;
     }
-    public ArrayList<Jugadores> getJugadores() {
-        return Jugadores;
+
+    public List<Jugadores> getJugadores() {
+        return jugadores;
     }
 
-    public ArrayList<Equipos> getEquiposJson() {
-        return equiposJson;
+    public void setJugadores(List<Jugadores> jugadores) {
+        this.jugadores = jugadores;
     }
 
-    public void setEquiposJson(ArrayList<Equipos> equiposJson) {
-        this.equiposJson = equiposJson;
+    
+    @Override
+    public String toString() {
+        return String.format("ID: %d | Equipo: %s | Fundación: %d | Entrenador: %s", id, name, yearfoundation, coach);
     }
 }

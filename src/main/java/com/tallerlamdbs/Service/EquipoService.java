@@ -39,8 +39,8 @@ public class EquipoService {
                 Long id = (Long) equipo.get("id");
                 String name = (String) equipo.get("name");
                 int yearfoundation = Integer.parseInt(equipo.get("yearfoundation").toString());
-
                 System.out.printf("%-5d | %-20s | %-15s %n", id, name, yearfoundation);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,7 +51,36 @@ public class EquipoService {
                 .collect(Collectors.toList());
             }
 
-            public void imprimirEntrenadores (List<Equipos>equiposJson){
-                equiposJson.forEach(e -> System.out.println(e.getCoach()));
-            }
+          public static List<String> obtenerNombresEntrenadores() {
+    List<String> nombresEntrenadores = new ArrayList<>();
+
+    try {
+        // Leer JSON
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(JSON_PATH));
+        JSONObject jsonObject = (JSONObject) obj;
+
+        // Obtener la lista de equipos del JSON
+        JSONArray equipos = (JSONArray) jsonObject.get("equipos");
+       
+        System.out.println("---------------------------------------");
+        System.out.printf("%-20s | %-15s %n",  "Equipo", "Entrenador");
+        System.out.println("---------------------------------------");
+
+        // Recorrer los equipos y extraer los nombres de los entrenadores
+        for (Object equipoObj : equipos) {
+            JSONObject equipo = (JSONObject) equipoObj;
+            String coach = (String) equipo.get("coach"); // Obtener el nombre del entrenador
+            nombresEntrenadores.add(coach);
+            String name = (String) equipo.get("name"); 
+            System.out.printf("%-20s | %-15s %n", name, coach);
+
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return nombresEntrenadores;
+}
+
 }

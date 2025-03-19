@@ -8,7 +8,7 @@ import com.tallerlamdbs.Modelos.Equipos;
 import com.tallerlamdbs.Service.EquipoService;
 
 public class Main {
-    private static List<Equipos> equiposJson;
+
     EquipoService equipoService = new EquipoService();
     public static void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
@@ -61,7 +61,7 @@ public class Main {
             System.out.println("========================");
             System.out.println("1. Listar equipos fundados desde 2000");
             System.out.println("2. listar entrenadores");
-            System.out.println("2. Volver al menú principal");
+            System.out.println("3. Volver al menú principal");
             
             System.out.print("Seleccione una opción: ");
 
@@ -70,12 +70,15 @@ public class Main {
 
           switch (opcion) {
             case 1:
-            listarEquipos(equipoService);
+            listarEquipos(
+
+            );
                 
                 break;
           case 2 :
-          imprimirEntrenadores();
+          listarEntrenadores(equipoService);
                 break;
+                case 3 : return;
           }
         }
     }
@@ -127,21 +130,17 @@ public class Main {
         }
     }
 
-    private static void listarEquipos(EquipoService equipoService) {
+    private static void listarEquipos() {
         Predicate<Equipos> filtroDesde2000 = equipo -> equipo.getYearfoundation() >= 2000;
-        List<Equipos> equipos = EquipoService.listarEquipos(filtroDesde2000);
+    List<Equipos> equipos = EquipoService.listarEquipos(filtroDesde2000);
         System.out.println(equipos);
         }
     
-
-        private static void imprimirEntrenadores() {
-            if (equiposJson != null && !equiposJson.isEmpty()) {
-                System.out.println("Coachs: ");
-                equiposJson.forEach(e -> System.out.println(e.getCoach()));
-            } else {
-                System.out.println("No hay Coachs disponibles.");
-            }
-        }
+        private static void listarEntrenadores(EquipoService equipoService) {
+            @SuppressWarnings("unused")
+            List<String> entrenadores = EquipoService.obtenerNombresEntrenadores();
+       
+           
         
-    }
+    }}
 
